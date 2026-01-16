@@ -310,7 +310,7 @@ user_id - Ascending</DefaultAnnotationText>
     </Node>
     <Node ToolID="5">
       <GuiSettings Plugin="AlteryxGuiToolkit.ToolContainer.ToolContainer">
-        <Position x="341" y="329" width="408" height="149" />
+        <Position x="341" y="329" width="408" height="180" />
       </GuiSettings>
       <Properties>
         <Configuration>
@@ -335,11 +335,12 @@ user_id - Ascending</DefaultAnnotationText>
             <Configuration>
               <SummarizeFields>
                 <SummarizeField field="user_id" action="GroupBy" rename="user_id" />
-                <SummarizeField field="content_id" action="Count" rename="Count" />
+                <SummarizeField field="content_id" action="GroupBy" rename="content_id" />
               </SummarizeFields>
             </Configuration>
             <Annotation DisplayMode="0">
               <Name />
+              <AnnotationText><![CDATA[dedup user and content ]]></AnnotationText>
               <DefaultAnnotationText />
               <Left value="False" />
             </Annotation>
@@ -362,6 +363,26 @@ user_id - Ascending</DefaultAnnotationText>
             </Annotation>
           </Properties>
           <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+        </Node>
+        <Node ToolID="15">
+          <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
+            <Position x="498" y="378" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <SummarizeFields>
+                <SummarizeField field="user_id" action="GroupBy" rename="user_id" />
+                <SummarizeField field="content_id" action="Count" rename="Count" />
+              </SummarizeFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <AnnotationText><![CDATA[count total number of contents ]]></AnnotationText>
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
         </Node>
       </ChildNodes>
     </Node>
@@ -413,6 +434,10 @@ user_id - Ascending</DefaultAnnotationText>
     </Connection>
     <Connection>
       <Origin ToolID="3" Connection="Output" />
+      <Destination ToolID="15" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="15" Connection="Output" />
       <Destination ToolID="4" Connection="Input" />
     </Connection>
   </Connections>
