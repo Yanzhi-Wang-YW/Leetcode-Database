@@ -1,2 +1,0 @@
-# Leetcode SQL 
-- Leetcode SQL 
